@@ -1,6 +1,6 @@
 import "./styles.css"
 
-function Todo({ todos, editTodo, setEditTodo, handleEdit, handleDelete, handleUpdate, handleComplete, setInputValue }) {
+function Todo({ todos, editTodo, setEditTodo, handleEdit, handleDelete, handleUpdate, handleComplete, setInputValue,inputValue }) {
 
     return (
         <>
@@ -15,14 +15,14 @@ function Todo({ todos, editTodo, setEditTodo, handleEdit, handleDelete, handleUp
 
                             <input type="checkbox" className="todo-complete" onClick={() => handleComplete(id)} />
 
-                            {isEditing ?
-                                <input type="text" className="todo-input-edit" value={editTodo.content} onChange={(e) => setInputValue(e.target.value)} /> :
+                            {editTodo.isEditing ?
+                                <input type="text" className="todo-input-edit" value={inputValue} onChange={(e) => setInputValue(e.target.value)} /> :
                                 <input type="text" className="todo-input" value={content} />}
                         </div>
 
                         <div className="buttons">
 
-                            {isEditing ?
+                            {editTodo.isEditing ?
                                 <i class="fa-solid fa-upload" onClick={() => handleUpdate(id)}></i > :
                                 <i class="fa-solid fa-pen-to-square" onClick={() => handleEdit(todo)}></i>}
 

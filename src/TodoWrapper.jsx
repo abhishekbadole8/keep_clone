@@ -7,7 +7,7 @@ uuidv4()
 function TodoWrapper() {
     const [inputValue, setInputValue] = useState('')
     const [todos, setTodos] = useState([])
-    const [editTodo, setEditTodo] = useState()
+    const [editTodo, setEditTodo] = useState({})
 
     function handleSubmit(e) {
         e.preventDefault()
@@ -19,6 +19,7 @@ function TodoWrapper() {
 
     function handleEdit(selectedTodo) {
         setEditTodo({ ...selectedTodo, isEditing: !selectedTodo.isEditing })
+        setInputValue(selectedTodo.content)
     }
 
     function handleUpdate(id) {
@@ -27,6 +28,8 @@ function TodoWrapper() {
             prevTodo.map((todo) =>
                 todo.id == id ? { ...todo, content: new_content, isEditing: false } : todo
             ))
+        setEditTodo({})
+        setInputValue('')
     }
 
     function handleComplete(id) {
@@ -36,7 +39,7 @@ function TodoWrapper() {
     function handleDelete(id) {
         setTodos((prevTodo) => prevTodo.filter((todo) => todo.id !== id))
     }
-    console.log(editTodo)
+
     return (
         <>
             <div className="head-container">
@@ -48,8 +51,8 @@ function TodoWrapper() {
 
             <div className="todo-container">
 
-                < Todo todos={todos} editTodo={editTodo} setEditTodo={setEditTodo} handleEdit={handleEdit} setInputValue={setInputValue}
-                    handleDelete={handleDelete} handleUpdate={handleUpdate} handleComplete={handleComplete} />
+                < Todo todos={todos} editTodo={editTodo} setEditTodo={setEditTodo} handleEdit={handleEdit} inputValue={inputValue}
+                    setInputValue={setInputValue} handleDelete={handleDelete} handleUpdate={handleUpdate} handleComplete={handleComplete} />
 
             </div>
         </>
