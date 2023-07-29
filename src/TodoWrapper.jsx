@@ -44,7 +44,7 @@ function TodoWrapper() {
         <>
             <div className="head-container">
                 <form onSubmit={handleSubmit}>
-                    <input type="text" className="head-input" placeholder="Add to do ....." value={inputValue} onChange={(e) => setInputValue(e.target.value)} />
+                    <input type="text" className="head-input" placeholder="Add to do ....." value={Object.keys(editTodo).length === 0 ? inputValue : ""} onChange={(e) => setInputValue(e.target.value)} />
                     <button type="submit" className="add-btn">Add</button>
                 </form>
             </div>
