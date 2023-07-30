@@ -1,4 +1,4 @@
-import "./styles.css"
+import "../styles.css"
 
 function Todo({ todos, editTodo, setEditTodo, handleEdit, handleDelete, handleUpdate, handleComplete, setInputValue,inputValue }) {
 
@@ -15,14 +15,14 @@ function Todo({ todos, editTodo, setEditTodo, handleEdit, handleDelete, handleUp
 
                             <input type="checkbox" className="todo-complete" onClick={() => handleComplete(id)} />
 
-                            {editTodo.isEditing ?
+                            {editTodo.id ==id && editTodo.isEditing ?
                                 <input type="text" className="todo-input-edit" value={inputValue} onChange={(e) => setInputValue(e.target.value)} /> :
                                 <input type="text" className="todo-input" value={content} />}
                         </div>
 
                         <div className="buttons">
 
-                            {editTodo.isEditing ?
+                            {editTodo.id ==id && editTodo.isEditing?
                                 <i class="fa-solid fa-upload" onClick={() => handleUpdate(id)}></i > :
                                 <i class="fa-solid fa-pen-to-square" onClick={() => handleEdit(todo)}></i>}
 

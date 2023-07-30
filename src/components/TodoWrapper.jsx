@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Todo from "./Todo";
-import "./styles.css"
+import "../styles.css"
 import { v4 as uuidv4 } from "uuid"
 uuidv4()
 
