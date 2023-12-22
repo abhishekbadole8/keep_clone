@@ -5,8 +5,8 @@ import { v4 as uuidv4 } from "uuid"
 uuidv4()
 
 function TodoWrapper() {
-    const [inputTitle, setInputTitle] = useState('t1');
-    const [inputContent, setInputContent] = useState('t2');
+    const [inputTitle, setInputTitle] = useState('');
+    const [inputContent, setInputContent] = useState('');
     const [selectedColor, setSelectedColor] = useState('#fff');
     const [todos, setTodos] = useState([])
     const [editTodo, setEditTodo] = useState({})
