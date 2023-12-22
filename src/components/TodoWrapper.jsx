@@ -5,35 +5,43 @@ import { v4 as uuidv4 } from "uuid"
 uuidv4()
 
 function TodoWrapper() {
-    const [inputValue, setInputValue] = useState('')
+    const [inputTitle, setInputTitle] = useState('t1');
+    const [inputContent, setInputContent] = useState('t2');
+    const [selectedColor, setSelectedColor] = useState('#fff');
     const [todos, setTodos] = useState([])
     const [editTodo, setEditTodo] = useState({})
 
     function handleSubmit(e) {
         e.preventDefault()
         setTodos((prevTodo) => [
-            ...prevTodo, { id: uuidv4(), content: inputValue, isEditing: false, isCompleted: false }
+            ...prevTodo, { id: uuidv4(), title: inputTitle, content: inputContent, isEditing: false, color: selectedColor }
         ])
-        setInputValue('')
+        setInputTitle('');
+        setInputContent('')
     }
 
     function handleEdit(selectedTodo) {
         setEditTodo({ ...selectedTodo, isEditing: !selectedTodo.isEditing })
-        setInputValue(selectedTodo.content)
+        setInputTitle(selectedTodo.title);
+        setInputContent(selectedTodo.content)
+        setSelectedColor(selectedTodo.color);
     }
 
     function handleUpdate(id) {
-        const new_content = inputValue
+        const new_content = inputContent
         setTodos((prevTodo) =>
             prevTodo.map((todo) =>
-                todo.id == id ? { ...todo, content: new_content, isEditing: false } : todo
+                todo.id == id ? { ...todo, title: inputTitle, content: new_content, isEditing: false, color: selectedColor } : todo
             ))
         setEditTodo({})
-        setInputValue('')
+        setInputTitle('');
+        setInputContent('')
     }
 
-    function handleComplete(id) {
-        setTodos((prevTodo) => prevTodo.map((todo) => todo.id == id ? { ...todo, isCompleted: !todo.isCompleted } : todo))
+    function handleColor(id, color) {
+        setTodos((prevTodo) =>
+            prevTodo.map((todo) => (todo.id === id ? { ...todo, color: color } : todo))
+        );
     }
 
     function handleDelete(id) {
@@ -44,17 +52,33 @@ function TodoWrapper() {
         <>
             <div className="head-container">
                 <form onSubmit={handleSubmit}>
-                    <input type="text" className="head-input" placeholder="Add to do ....." value={Object.keys(editTodo).length === 0 ? inputValue : ""} onChange={(e) => setInputValue(e.target.value)} />
-                    <button type="submit" className="add-btn">Add</button>
+                    <div>
+                        <input type="text" className="head-input" placeholder="Add title....." value={Object.keys(editTodo).length === 0 ? inputTitle : ""} onChange={(e) => setInputTitle(e.target.value)} />
+                        <textarea
+                            className="content-input"
+                            placeholder="Enter content..."
+                            value={Object.keys(editTodo).length === 0 ? inputContent : ""}
+                            onChange={(e) => setInputContent(e.target.value)}
+                        ></textarea>                    </div>
+                    <input
+                        type="color"
+                        value={selectedColor}
+                        onChange={(e) => setSelectedColor(e.target.value)}
+                        className="color-input"
+                    />
+                    <button type="submit" className="add-btn" disabled={!inputContent && !inputTitle}>Add</button>
                 </form>
             </div>
 
-            <div className="todo-container">
+            {todos &&
+                <div className="todo-container">
 
-                < Todo todos={todos} editTodo={editTodo} setEditTodo={setEditTodo} handleEdit={handleEdit} inputValue={inputValue}
-                    setInputValue={setInputValue} handleDelete={handleDelete} handleUpdate={handleUpdate} handleComplete={handleComplete} />
+                    < Todo todos={todos} editTodo={editTodo} setEditTodo={setEditTodo} handleEdit={handleEdit} inputContent={inputContent}
+                        setInputContent={setInputContent} handleDelete={handleDelete} handleUpdate={handleUpdate} handleColor={handleColor}
+                        inputTitle={inputTitle} setInputTitle={setInputTitle} />
 
-            </div>
+                </div>
+            }
         </>
     )
 }

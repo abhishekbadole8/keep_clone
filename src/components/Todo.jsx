@@ -1,24 +1,41 @@
 import "../styles.css"
 
-function Todo({ todos, editTodo, setEditTodo, handleEdit, handleDelete, handleUpdate, handleComplete, setInputValue, inputValue }) {
+function Todo({ todos, editTodo, setEditTodo, handleEdit, handleDelete, handleUpdate, handleColor, setInputContent, setInputTitle, inputTitle, inputContent }) {
 
     return (
         <>
             {todos.map((todo) => {
 
-                const { id, content, isEditing, isCompleted } = todo
+                const { id, title, content, isEditing, color } = todo
 
                 return (
-                    <div className={`${'todo'} ${isCompleted ? "complete" : ""}`} key={id}>
+                    <div className='todo' style={{ backgroundColor: color }} key={id}>
 
                         <div className="todo-content">
+                            {/* Add title input */}
+                            {editTodo.id === id && editTodo.isEditing ? (
+                                <input
+                                    type="text"
+                                    className="todo-input-title"
+                                    value={inputTitle}
+                                    onChange={(e) => setInputTitle(e.target.value)}
+                                    placeholder="Enter title"
+                                />
+                            ) : (
+                                <h2 className="todo-title">{title}</h2>
+                            )}
 
-                            <input type="checkbox" className="todo-complete" onClick={() => handleComplete(id)} />
-
-                            {editTodo.id == id && editTodo.isEditing ?
-                                <input type="text" className="todo-input-edit" value={inputValue} onChange={(e) => setInputValue(e.target.value)} /> :
-                                // <input type="text"  value= />
-                                <p className="todo-input">{content}</p>}
+                            {/* Add content input */}
+                            {editTodo.id === id && editTodo.isEditing ? (
+                                <textarea
+                                    className="todo-input-edit"
+                                    value={inputContent}
+                                    onChange={(e) => setInputContent(e.target.value)}
+                                    placeholder="Enter content"
+                                />
+                            ) : (
+                                <p className="todo-input">{content}</p>
+                            )}
                         </div>
 
                         <div className="buttons">

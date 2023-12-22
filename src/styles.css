@@ -7,7 +7,7 @@
 .App {
     width: 100vw;
     height: 100vh;
-    background-color: #000;
+    background-color: #fff;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -18,61 +18,83 @@
 .todo-container {
     margin-top: 5%;
     padding: .5rem;
-
 }
 
 .head-container form {
     display: flex;
-    gap: 10%;
-    font-size: 18px;
+    gap: .75rem;
+    align-items: center;
+    font-size: 1rem;
 }
 
-.head-input {
+form div {
+    display: flex;
+    flex-direction: column;
+}
+
+.head-input,
+textarea {
     width: 30vw;
+    height: auto;
     padding: .5rem;
+    border: 1px solid grey;
+    border-radius: .5rem;
+    margin-top: .75rem;
 }
 
 .add-btn {
+    cursor: pointer;
     background-color: violet;
     color: #fff;
-    font-size: 18px;
-    padding: .5rem;
-    border: none;
+    padding: .5rem 1.25rem;
+    border-radius: .5rem;
+    border: 1px solid grey;
+    font-size: 1rem;
+}
+
+.add-btn:hover {
+    color: black;
 }
 
 /* todo-container */
 .todo-container {
+    width: 32%;
+    height: auto;
     display: flex;
     flex-direction: column;
-    gap: 10%;
-    background-color: grey;
 }
 
 /* todo start here */
 .todo {
     width: 100%;
     border: 1px solid grey;
+    border-radius: .5rem;
     display: flex;
     justify-content: center;
     padding: .5rem;
     gap: .5rem;
+    margin-bottom: .5rem;
 }
 
 .todo-content {
     display: flex;
+    /* flex-direction: column; */
     align-items: center;
     gap: .5rem;
 }
 
-.todo-complete {
-    width: 25px;
-    height: 25px;
+.todo-content input {
+    width: 50%;
+}
+
+.todo-content textarea {
+    width: 50%;
 }
 
 .todo-input {
     font-size: 22px;
     padding: .5rem;
-    border: none;
+    /* border: none; */
     border-radius: 5px;
     background-color: transparent;
 }
@@ -82,7 +104,6 @@
     padding: .5rem;
     border: none;
     border-radius: 5px;
-    background-color: #fff;
 }
 
 .buttons {
@@ -93,7 +114,7 @@
 
 .buttons i {
     cursor: pointer;
-    color: #fff;
+    color: #000;
     font-size: 22px;
 }
 
@@ -103,10 +124,6 @@
 
 .fa-trash:hover {
     color: red;
-}
-
-.complete {
-    background: rgb(185, 211, 185);
 }
 
 .fa-upload:hover {
